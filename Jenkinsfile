@@ -22,8 +22,7 @@ pipeline{
         }
         stage('deploy to production'){
             steps{
-                build job: 'deploy-to-production
-'
+                build job: 'deploy-to-production'
             }
         }
     }
