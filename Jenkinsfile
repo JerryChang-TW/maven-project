@@ -27,7 +27,7 @@ pipeline{
             parallel{
                 stage('staging'){
                     steps{
-                       sh "scp -i /opt/id_rsa **/*.war ubuntu@${params.DEV_STAGING}:/var/lib/tomcat10/webapps"
+                       sh "scp -o StrictHostKeyChecking=no -i /opt/id_rsa **/*.war ubuntu@${params.DEV_STAGING}:/var/lib/tomcat10/webapps"
                     }
                     post{
                         success{
@@ -40,7 +40,7 @@ pipeline{
                 }
                 stage('production'){
                     steps{
-                        sh "scp -i /opt/id_rsa **/*.war ubuntu@${params.DEV_PRODUCTION}:/var/lib/tomcat10/webapps"
+                        sh "scp -o StrictHostKeyChecking=no -i /opt/id_rsa **/*.war ubuntu@${params.DEV_PRODUCTION}:/var/lib/tomcat10/webapps"
                     }
                     post{
                         success{
