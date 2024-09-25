@@ -28,7 +28,7 @@ pipeline{
                 stage('staging'){
                     steps{
                        sh '''
-                       chmod 766 **/target/*.war
+                       chmod 766 $(find . -name "*.war")
                        scp -o StrictHostKeyChecking=no -i /opt/id_rsa **/target/*.war ubuntu@${params.DEV_STAGING}:/var/lib/tomcat10/webapps
                        '''
                     }
