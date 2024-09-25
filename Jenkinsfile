@@ -19,7 +19,7 @@ pipeline{
             post{
                 success{
                     echo 'starting save file'
-                    archiveArtifacts(artifacts: '**/*.war')
+                    archiveArtifacts(artifacts: '**/target/*.war')
                 }
             }
         }
@@ -27,7 +27,7 @@ pipeline{
             parallel{
                 stage('staging'){
                     steps{
-                       sh "scp -o StrictHostKeyChecking=no -i /opt/id_rsa **/*.war ubuntu@${params.DEV_STAGING}:/var/lib/tomcat10/webapps"
+                       sh "scp -o StrictHostKeyChecking=no -i /opt/id_rsa **/target/*.war ubuntu@${params.DEV_STAGING}:/var/lib/tomcat10/webapps"
                     }
                     post{
                         success{
@@ -40,7 +40,7 @@ pipeline{
                 }
                 stage('production'){
                     steps{
-                        sh "scp -o StrictHostKeyChecking=no -i /opt/id_rsa **/*.war ubuntu@${params.DEV_PRODUCTION}:/var/lib/tomcat10/webapps"
+                        sh "scp -o StrictHostKeyChecking=no -i /opt/id_rsa **/target/*.war ubuntu@${params.DEV_PRODUCTION}:/var/lib/tomcat10/webapps"
                     }
                     post{
                         success{
