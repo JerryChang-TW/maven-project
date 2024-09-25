@@ -27,9 +27,9 @@ pipeline{
             parallel{
                 stage('staging'){
                     steps{
-                       sh '''
+                       sh """
                        scp -o StrictHostKeyChecking=no -i /opt/id_rsa **/target/*.war ubuntu@${params.DEV_STAGING}:/var/lib/tomcat10/webapps
-                       '''
+                       """
                     }
                     post{
                         success{
